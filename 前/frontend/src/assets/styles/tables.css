@@ -1,0 +1,126 @@
+/* 表格与徽章 */
+/* ---------- 表格 ---------- */
+.table-wrap {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  background: var(--c-surface);
+  box-shadow: var(--shadow-soft);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-text-secondary);
+  background: var(--c-surface-2);
+  border-bottom: 1px solid var(--c-border);
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: middle;
+}
+
+/* 斑马纹：纸底上的弱对比分隔，配合 hover 更易读 */
+.table tbody tr:nth-child(even) td {
+  background: oklch(0.32 0.02 70 / 0.02);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background 0.14s;
+}
+
+.table tbody tr:hover td {
+  background: var(--c-row-hover);
+}
+
+.table .cell-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+/* 表格序号列（编辑编号） */
+.th-index {
+  width: 46px;
+  text-align: center;
+  color: var(--c-text-faint);
+}
+
+.row-index {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--c-text-faint);
+  user-select: none;
+}
+
+.table .num {
+  font-variant-numeric: tabular-nums;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ---------- 徽章（暖色块） ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 11px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.pill--primary {
+  background: var(--c-primary-bg);
+  color: var(--c-primary-text);
+}
+
+.pill--danger {
+  background: var(--c-danger-bg);
+  color: var(--c-danger);
+}
+
+.pill--success {
+  background: var(--c-success-bg);
+  color: var(--c-success);
+}
+
+.pill--warning {
+  background: var(--c-warning-bg);
+  color: var(--c-warning);
+}
+
+.pill--neutral {
+  background: var(--c-pill-neutral-bg);
+  color: var(--c-text-secondary);
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  flex: none;
+}

@@ -1,0 +1,14 @@
+/* ============================================================
+   个人记账 · 设计系统入口
+   按职责拆分到 styles/ 目录，此处按顺序聚合引入。
+   ============================================================ */
+
+@import './styles/tokens.css';
+@import './styles/layout.css';
+@import './styles/buttons.css';
+@import './styles/forms.css';
+@import './styles/tables.css';
+@import './styles/states.css';
+@import './styles/overlays.css';
+@import './styles/animations.css';
+@import './styles/responsive.css';

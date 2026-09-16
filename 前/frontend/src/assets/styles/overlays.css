@@ -1,0 +1,212 @@
+/* 覆盖层：弹窗 / Toast / 分页 */
+/* ---------- 弹窗（无毛玻璃，实色遮罩） ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8vh 16px 16px;
+  background: oklch(0.22 0.02 70 / 0.55);
+  overflow-y: auto;
+  animation: overlay-in 0.18s ease;
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: 560px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lift);
+  animation: modal-in 0.18s ease;
+}
+
+.modal-panel--sm {
+  max-width: 420px;
+}
+
+.modal-panel:focus {
+  outline: none;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+.modal-close {
+  min-width: 40px;
+  min-height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  color: var(--c-text-secondary);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.modal-close:hover {
+  background: var(--c-surface-2);
+  color: var(--c-text);
+}
+
+.modal-body {
+  padding: 22px;
+}
+
+.modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--c-border);
+}
+
+/* ---------- Toast ---------- */
+.toast-host {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+/* 整框底色 + 语义图标传达类型；不用左侧色条（side-stripe） */
+.toast {
+  min-width: 250px;
+  max-width: 380px;
+  padding: 13px 16px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background: var(--c-surface);
+  box-shadow: var(--shadow-lift);
+  font-size: 14px;
+  pointer-events: auto;
+  animation: toast-in 0.2s ease;
+}
+
+.toast--success {
+  background: var(--c-success-bg);
+  border-color: color-mix(in oklch, var(--c-success) 28%, var(--c-surface));
+}
+
+.toast--error {
+  background: var(--c-danger-bg);
+  border-color: color-mix(in oklch, var(--c-danger) 28%, var(--c-surface));
+}
+
+.toast--info {
+  background: var(--c-primary-bg);
+  border-color: color-mix(in oklch, var(--c-primary) 28%, var(--c-surface));
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------- 分页 ---------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.pagination-info {
+  font-size: 13px;
+  color: var(--c-text-secondary);
+}
+
+.pagination-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 8px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background: var(--c-surface);
+  color: var(--c-text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: var(--c-border-strong);
+  color: var(--c-text);
+  background: var(--c-surface-2);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-btn.is-active {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: var(--c-on-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.pagination-size {
+  min-height: 44px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 0 8px;
+}

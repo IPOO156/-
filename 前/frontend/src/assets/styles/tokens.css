@@ -1,0 +1,176 @@
+/* 设计令牌 + 基础重置（split from base.css） */
+:root {
+  /* ============================================================
+     色板（OKLCH）：中性纸底 + 单一赭石强调色
+     —— 色彩策略：Restrained 纸面（近白中性 + 强调 ≤10%）+
+        登录/侧栏为品牌承诺面（深赭墨）。
+     —— 场景：夜晚的家，屏幕是唯一光源；界面要像陈年账册一样
+        安静、可信、沉稳。
+     —— 2026 奶油/羊皮纸 AI 默认带（OKLCH L .84-.97, C<.06, hue 40-100）
+        全部避开：纸面用 chroma≈0 的中性，暖意由赭石主色、衬线字体、
+        印章与山水意象承担，而不是底色。
+     ============================================================ */
+
+  /* 表面 */
+  --c-bg: oklch(0.968 0 0); /* 中性近白（非奶油） */
+  --c-surface: oklch(0.992 0 0);
+  --c-surface-2: oklch(0.952 0.008 80); /* 面板/表头：轻微偏品牌色暖调 */
+  --c-input-bg: oklch(0.99 0 0);
+
+  --c-border: oklch(0.908 0.009 80);
+  --c-border-strong: oklch(0.845 0.014 75);
+
+  /* 文字（全部 ≥4.5:1，含占位符/弱化文字） */
+  --c-text: oklch(0.3 0.02 70);
+  --c-text-secondary: oklch(0.46 0.02 70);
+  --c-text-faint: oklch(0.54 0.022 70);
+
+  /* 主色：赭石（比旧琥珀更深、更有记忆点） */
+  --c-primary: oklch(0.53 0.13 55);
+  --c-primary-hover: oklch(0.47 0.12 55);
+  --c-primary-strong: oklch(0.43 0.115 55);
+  --c-primary-bg: oklch(0.945 0.028 72);
+  --c-primary-text: oklch(0.44 0.11 55);
+
+  /* 语义色 */
+  --c-success: oklch(0.46 0.1 155);
+  --c-success-bg: oklch(0.95 0.03 155);
+  --c-danger: oklch(0.49 0.15 27);
+  --c-danger-hover: oklch(0.43 0.14 27);
+  --c-danger-bg: oklch(0.95 0.032 27);
+  --c-warning: oklch(0.53 0.1 75);
+  --c-warning-bg: oklch(0.952 0.03 78);
+
+  /* 深赭墨（侧栏 / 登录品牌面） */
+  --c-nav-bg: oklch(0.22 0.02 70);
+  --c-nav-text: oklch(0.72 0.03 78);
+  --c-nav-muted: oklch(0.6 0.02 78);
+  --c-nav-hover: oklch(0.92 0.015 85);
+  --c-nav-border: oklch(0.9 0.02 80 / 0.16);
+
+  /* 深/浅面上的前景文字 */
+  --c-on-nav: oklch(0.945 0.012 85);
+  --c-on-primary: oklch(0.985 0.005 85);
+
+  /* 徽章 / 中性块 / 行悬停（统一暖灰族，不混冷灰） */
+  --c-pill-neutral-bg: oklch(0.935 0.012 80);
+  --c-chip-neutral: oklch(0.945 0.014 75);
+  --c-chip-neutral-ink: oklch(0.47 0.02 70);
+  --c-row-hover: oklch(0.955 0.012 82);
+
+  /* 进度 / 骨架 / 滚动条 */
+  --c-progress-bg: oklch(0.91 0.014 78);
+  --c-skeleton-1: oklch(0.92 0.012 80);
+  --c-skeleton-2: oklch(0.955 0.008 85);
+  --c-scrollbar: oklch(0.84 0.02 80);
+  --c-scrollbar-hover: oklch(0.76 0.025 75);
+
+  /* 印章红（品牌） */
+  --c-seal: oklch(0.45 0.16 27);
+  --c-seal-ink: oklch(0.95 0.012 85);
+
+  /* 阴影：带品牌色倾向的暖调投影（单一光源，多层柔化扩散，模拟纸张浮起） */
+  --shadow-soft: 0 1px 2px oklch(0.32 0.02 70 / 0.04), 0 2px 6px oklch(0.32 0.02 70 / 0.03),
+    0 16px 40px oklch(0.32 0.02 70 / 0.05);
+  --shadow-lift: 0 1px 3px oklch(0.32 0.02 70 / 0.06), 0 8px 20px oklch(0.32 0.02 70 / 0.07),
+    0 32px 64px oklch(0.32 0.02 70 / 0.1);
+  --shadow-primary: 0 2px 6px oklch(0.42 0.1 55 / 0.22), 0 12px 28px oklch(0.42 0.1 55 / 0.18);
+
+  /* ============================================================
+     层级（语义化 z-index：dropdown → sticky → modal → toast）。
+     拒绝 999 / 9999 之类的魔法值。
+     ============================================================ */
+  --z-base: 0;
+  --z-sticky: 20;
+  --z-dropdown: 30;
+  --z-modal-backdrop: 50;
+  --z-modal: 60;
+  --z-toast: 100;
+  --z-grain: 1000;
+
+  /* 几何 */
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  /* 动效缓动（复用，避免散落魔法贝塞尔） */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* 字体：衬线用于大标题/数字（宋体系），正文黑体系 */
+  --font-sans: 'Segoe UI', -apple-system, 'PingFang SC', 'Microsoft YaHei',
+    'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Songti SC', 'STSong', 'SimSun', Georgia, 'Times New Roman', serif;
+  --font-kai: 'KaiTi', 'STKaiti', '楷体', 'Kaiti SC', var(--font-display);
+  --font-mono: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+::selection {
+  background: oklch(0.53 0.13 55 / 0.18);
+}
+
+/* 滚动条（暖灰族） */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-scrollbar-hover);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--c-text);
+  /* 偶数分栏，避免长标题孤行/寡字 */
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--c-primary);
+  text-decoration: none;
+}
