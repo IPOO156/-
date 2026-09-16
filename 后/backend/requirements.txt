@@ -1,0 +1,7 @@
+# 记账后端依赖（Python 3.14 已验证）
+# 数据库驱动使用 PyMySQL（backend/__init__.py 垫片），勿换 mysqlclient（Python 3.14 无预编译 wheel）
+Django==5.2.1
+djangorestframework==3.18.0
+django-cors-headers==4.9.0
+PyMySQL==1.2.0
+python-dotenv==1.2.2
